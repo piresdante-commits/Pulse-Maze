@@ -1,0 +1,125 @@
+package testdepulso2d;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseEvent;
+
+public class PanelJuego extends JPanel implements MouseMotionListener {
+    int[][] mapa = Mapa.mapa1;
+    int numeroMapa = 1;
+    
+    int tamañoCelda = 80;// Cada posición de la matriz ocupará un cuadrado de 80 × 80 píxeles.
+    
+    Jugador jugador = new Jugador();
+    
+    boolean perdio = false; // Evita que el juego detecte la misma derrota varias veces.
+
+    public PanelJuego() {
+        addMouseMotionListener(this); // Esta pendiente de de los movimientos de mouse.
+    }
+
+    public void cambiarMapa() {
+        perdio = false; 
+        
+        numeroMapa++; // Esto aumenta la variable en uno (cambia el mapa).
+
+        if (numeroMapa > 3) {
+            numeroMapa = 1;
+        }
+
+        if (numeroMapa == 1) {
+            mapa = Mapa.mapa1;
+        }
+
+        if (numeroMapa == 2) {
+            mapa = Mapa.mapa2;
+        }
+
+        if (numeroMapa == 3) {
+            mapa = Mapa.mapa3;
+        }
+
+        repaint(); // Vuelve a dibujar el panel.
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) { // Graphics es una herramienta que Java nos proporciona para dibujar cosas en la ventana.
+
+        super.paintComponent(g);
+
+        for (int fila = 0; fila < mapa.length; fila++) { // Mapa.length nos dice cuántas filas tiene la matriz.
+
+            for (int columna = 0; columna < mapa[fila].length; columna++) { // Recorre las columnas de cada fila.
+
+                if (mapa[fila][columna] == 1) {
+                    g.setColor(Color.BLACK);
+                }
+
+                if (mapa[fila][columna] == 0) {
+                    g.setColor(Color.WHITE);
+                }
+
+                if (mapa[fila][columna] == 2) {
+                    g.setColor(Color.GREEN);
+                }
+
+                if (mapa[fila][columna] == 3) {
+                    g.setColor(Color.RED);
+                }
+
+                g.fillRect(  // Recibe: x, y, ancho y alto.
+                    columna * tamañoCelda, // Determina dónde empieza horizontalmente.
+                    fila * tamañoCelda, // Determina dónde empieza verticalmente.
+                    tamañoCelda,
+                    tamañoCelda
+                );
+            }
+        }
+        g.setColor(Color.BLUE);
+
+        g.fillOval( // dibuja el circulo
+            jugador.columna * tamañoCelda + 20,
+            jugador.fila * tamañoCelda + 20,
+        40,
+        40
+);
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {  // Este método se ejecuta automáticamente cada vez que movemos el mouse sobre nuestro panel.
+
+        int x = e.getX();
+        int y = e.getY();
+
+        int columna = x / tamañoCelda;
+        int fila = y / tamañoCelda;
+
+        
+        if (fila >= 0 && fila < mapa.length &&
+            columna >= 0 && columna < mapa[fila].length) {
+            
+        jugador.columna = columna;
+        jugador.fila = fila;
+
+        repaint();
+        
+        if (mapa[fila][columna] == 1 && !perdio) {
+        perdio = true;
+        System.out.println("PERDISTE - Tocaste una pared");
+        cambiarMapa();
+        }
+        
+        if (mapa[fila][columna] == 2) {
+
+    System.out.println("¡GANASTE!");
+
+        }
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+}
