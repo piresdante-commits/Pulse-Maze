@@ -12,8 +12,10 @@ public class Ventana extends JFrame {  //Significa que nuestra clase Ventana her
 
         setResizable(false); //Esto evita que el usuario agrande o achique la ventana. (seguramente se saque)
 
+        PanelJuego panel = new PanelJuego();
+        add(panel);
         setVisible(true);
-        add(new PanelJuego());
+        panel.posicionarCursor();
     }
 }
 

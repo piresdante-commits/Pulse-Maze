@@ -8,12 +8,13 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.awt.Robot;
 
 public class PanelJuego extends JPanel implements MouseMotionListener {
     int[][] mapa = Mapa.mapa1;
     int numeroMapa = 1;
     
-    int tamañoCelda = 80;// Cada posición de la matriz ocupará un cuadrado de 80 × 80 píxeles.
+    int tamañoCelda = 20;// Cada posición de la matriz ocupará un cuadrado de ? × ? píxeles.
     
     Jugador jugador = new Jugador();
     
@@ -23,6 +24,27 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
         addMouseMotionListener(this); // Esta pendiente de de los movimientos de mouse.
     }
 
+    public void posicionarCursor() {
+
+    try {
+
+        Robot robot = new Robot();
+
+        int x = jugador.columna * tamañoCelda + 10;
+        int y = jugador.fila * tamañoCelda + 10;
+
+        robot.mouseMove(
+            getLocationOnScreen().x + x,
+            getLocationOnScreen().y + y
+        );
+
+    } catch (Exception e) {
+
+        System.out.println("No se pudo posicionar el cursor.");
+
+    }
+}
+    
     public void cambiarMapa() {
         perdio = false; 
         
@@ -35,16 +57,27 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
         if (numeroMapa == 1) {
             mapa = Mapa.mapa1;
         }
-
+            
+            jugador.fila = Mapa.filaInicio1;
+            jugador.columna = Mapa.columnaInicio1;
+        
         if (numeroMapa == 2) {
             mapa = Mapa.mapa2;
         }
 
+            jugador.fila = Mapa.filaInicio2;
+            jugador.columna = Mapa.columnaInicio2;
+        
         if (numeroMapa == 3) {
             mapa = Mapa.mapa3;
         }
-
+            
+            jugador.fila = Mapa.filaInicio3;
+            jugador.columna = Mapa.columnaInicio3;
+        
         repaint(); // Vuelve a dibujar el panel.
+        
+        posicionarCursor(); // posiciona el cursor sobre el checkpoint de cada mapa cada vez que cambian.
     }
 
     @Override
@@ -83,10 +116,10 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
         g.setColor(Color.BLUE);
 
         g.fillOval( // dibuja el circulo
-            jugador.columna * tamañoCelda + 20,
-            jugador.fila * tamañoCelda + 20,
-        40,
-        40
+            jugador.columna * tamañoCelda + 5,
+            jugador.fila * tamañoCelda + 5,
+        20,
+        20
 );
     }
 
