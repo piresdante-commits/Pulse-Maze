@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class PanelJuego extends JPanel implements MouseMotionListener {
     int[][] mapa = Mapa.mapa1;
@@ -115,8 +119,54 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
     System.out.println("¡GANASTE!");
 
         }
+        if (mapa[fila][columna] == 3) {
+            
+            reproducirGrito();
+            
+    ImageIcon imagenOriginal = new ImageIcon(
+    getClass().getResource("screamer ale.png")
+);
+
+ImageIcon imagen = new ImageIcon(
+    imagenOriginal.getImage().getScaledInstance(
+        1300,          //determina el hancho de la imagen
+        650,          //deteermina el largo de la imagen
+        java.awt.Image.SCALE_SMOOTH
+    )
+);
+
+    JOptionPane.showOptionDialog(
+    this,
+    "",
+    "¡¡¡SORPRESA!!!",
+    JOptionPane.DEFAULT_OPTION,
+    JOptionPane.PLAIN_MESSAGE,
+    imagen,
+    new Object[]{"Volver a jugar"},
+    "Volver a jugar"
+);
+
+cambiarMapa();
+}
         }
     }
+    public void reproducirGrito() {   
+    
+        try {
+        Clip clip = AudioSystem.getClip();
+
+        clip.open(AudioSystem.getAudioInputStream(
+            getClass().getResource("Sonidos-de-gritos.wav")
+        ));
+
+        clip.start();
+
+    } catch (Exception e) {     //en caso de que el grito no se reproduzca
+
+        System.out.println("No se pudo reproducir el sonido.");
+
+    }
+}
 
     @Override
     public void mouseDragged(MouseEvent e) {
