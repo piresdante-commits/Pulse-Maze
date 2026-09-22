@@ -102,7 +102,7 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
                 }
 
                 if (mapa[fila][columna] == 3) {
-                    g.setColor(Color.RED);
+                    g.setColor(Color.WHITE);
                 }
 
                 g.fillRect(  // Recibe: x, y, ancho y alto.
@@ -148,10 +148,9 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
         }
         
         if (mapa[fila][columna] == 2) {
-
-    System.out.println("¡GANASTE!");
-
+        mostrarVictoria(); 
         }
+        
         if (mapa[fila][columna] == 3) {
             
             reproducirGrito();
@@ -183,6 +182,54 @@ cambiarMapa();
 }
         }
     }
+    
+public void mostrarVictoria() {
+
+    reproducirMarc();
+    
+    ImageIcon imagenOriginal = new ImageIcon(
+        getClass().getResource("ganaste.gif")
+    );
+
+    ImageIcon imagen = new ImageIcon(
+        imagenOriginal.getImage().getScaledInstance(
+            1300,
+            600,
+            java.awt.Image.SCALE_DEFAULT
+        )
+    );
+
+    int opcion = JOptionPane.showOptionDialog(
+        this,
+        "",
+        "¡¡¡GANASTE!!!",
+        JOptionPane.DEFAULT_OPTION,
+        JOptionPane.PLAIN_MESSAGE,
+        imagen,
+        new Object[]{"Volver a jugar"},
+        "Volver a jugar"
+    );
+        cambiarMapa();
+    }
+
+ public void reproducirMarc() {   
+    
+        try {
+        Clip clip = AudioSystem.getClip();
+
+        clip.open(AudioSystem.getAudioInputStream(
+            getClass().getResource("marc.wav")
+        ));
+
+        clip.start();
+
+    } catch (Exception e) {     //en caso de que el grito no se reproduzca
+
+        System.out.println("No se pudo reproducir el sonido.");
+
+    }
+}
+    
     public void reproducirGrito() {   
     
         try {
