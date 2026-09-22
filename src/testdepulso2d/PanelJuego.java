@@ -56,24 +56,23 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
 
         if (numeroMapa == 1) {
             mapa = Mapa.mapa1;
-        }
-            
             jugador.fila = Mapa.filaInicio1;
             jugador.columna = Mapa.columnaInicio1;
-        
-        if (numeroMapa == 2) {
-            mapa = Mapa.mapa2;
         }
-
+        
+            else if (numeroMapa == 2) {
+            mapa = Mapa.mapa2;
             jugador.fila = Mapa.filaInicio2;
             jugador.columna = Mapa.columnaInicio2;
-        
-        if (numeroMapa == 3) {
-            mapa = Mapa.mapa3;
         }
-            
+
+        
+            else if (numeroMapa == 3) {
+            mapa = Mapa.mapa3;
             jugador.fila = Mapa.filaInicio3;
             jugador.columna = Mapa.columnaInicio3;
+        }
+         
         
         repaint(); // Vuelve a dibujar el panel.
         
