@@ -127,6 +127,10 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
 
         int x = e.getX();
         int y = e.getY();
+        
+        if (e.getY() < 20) {   //para poder pasar el mouse por la barra y salir del juego
+            return;
+        }
 
         int columna = x / tamañoCelda;
         int fila = y / tamañoCelda;
