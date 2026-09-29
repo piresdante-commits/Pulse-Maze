@@ -32,6 +32,6 @@ Estructura del proyecto:
 - Jugador.java: Representa la posición del jugador dentro del mapa.
 
 Autores:
--Pires Dante 
--Luases Meyer Mercedes
--Toledo Sofia 
+- Pires Dante 
+- Luases Meyer Mercedes
+- Toledo Sofia 
