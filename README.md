@@ -1,4 +1,5 @@
 Test de Pulso 2D (Pulse Maze)
+
 Pulse maze un juego de laberinto en 2D inpirado en maze of fear, donde el jugador debe atravezar distintos caminos utilizando el mouse, sin tocar las paredes.
 
 El juego cuenta con tres mapas distintos representados con matrices, cada uno con un diseño diferente. si el jugador toca una pared, el juego cambia automaticante a otro mapa y reinicia su posición en el punto de partida.
