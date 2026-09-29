@@ -9,8 +9,10 @@ import javax.swing.ImageIcon;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class PanelJuego extends JPanel implements MouseMotionListener {
+public class PanelJuego extends JPanel implements MouseMotionListener, KeyListener  {
     int[][] mapa = Mapa.mapa1;
     int numeroMapa = 1;
     
@@ -22,6 +24,8 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
 
     public PanelJuego() {
         addMouseMotionListener(this); // Esta pendiente de de los movimientos de mouse.
+        addKeyListener(this);   //Pendiente a la tecla esc.
+        setFocusable(true);
     }
 
     public void posicionarCursor() {
@@ -119,7 +123,9 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
             jugador.fila * tamañoCelda + 5,
         20,
         20
-);
+        );
+        g.setColor(Color.WHITE);
+        g.drawString("ESC: salir del juego", 10, 15);  //Texto que le indica al jugador como salir.
     }
 
     @Override
@@ -127,10 +133,6 @@ public class PanelJuego extends JPanel implements MouseMotionListener {
 
         int x = e.getX();
         int y = e.getY();
-        
-        if (e.getY() < 20) {   //para poder pasar el mouse por la barra y salir del juego
-            return;
-        }
 
         int columna = x / tamañoCelda;
         int fila = y / tamañoCelda;
@@ -254,5 +256,20 @@ public void mostrarVictoria() {
     @Override
     public void mouseDragged(MouseEvent e) {
 
+    }
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
     }
 }

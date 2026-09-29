@@ -5,7 +5,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,7 +15,7 @@ public class Ventana extends JFrame {  //Significa que nuestra clase Ventana her
     public Ventana() {
 
         setTitle("Test de Pulso 2D"); //Le ponemos un nombre a la ventana.
-        setSize(800, 650); //Tamaño de la ventana.
+        setSize(800, 600); //Tamaño de la ventana.
 
         setLocationRelativeTo(null);// centra la pantalla.
 
@@ -31,7 +30,7 @@ public class Ventana extends JFrame {  //Significa que nuestra clase Ventana her
 
         JPanel panelMenu = new JPanel();
 
-        panelMenu.setBackground(Color.BLACK);   //color del fondo
+        panelMenu.setBackground(Color.BLACK);   //color del fondo del menu
         panelMenu.setLayout(null);
 
         // Título
@@ -80,38 +79,17 @@ public class Ventana extends JFrame {  //Significa que nuestra clase Ventana her
         add(panelMenu);
 
         botonJugar.addActionListener(e -> {
+            getContentPane().removeAll();   //saca el menu
 
-            getContentPane().removeAll();  //saca el menu
+            PanelJuego panel = new PanelJuego();   //muestra el laberinto
 
-            // Barra superior
-            JPanel barraSuperior = new JPanel(new BorderLayout());
-            barraSuperior.setBackground(Color.BLACK);
-            barraSuperior.setPreferredSize(new Dimension(800, 30));
+            add(panel);
 
-            JButton botonSalir = new JButton("SALIR DEL JUEGO");   //boton de salir
-
-            botonSalir.setBackground(Color.BLACK);
-            botonSalir.setForeground(new Color(0, 255, 255));
-            botonSalir.setFocusPainted(false);
-            botonSalir.setFont(new Font("Arial", Font.BOLD, 14));
-
-            botonSalir.addActionListener(evento -> {
-                System.exit(0);   //para cerrar el programa
-            });
-
-            barraSuperior.add(botonSalir, BorderLayout.EAST);  //boton de salir a la derecha de la barra
-
-            PanelJuego panel = new PanelJuego();  //pone el juego
-
-            add(barraSuperior, BorderLayout.NORTH);   //la barra superior
-
-            add(panel, BorderLayout.CENTER);  //laberinto abajo
-
-            //actualiza la ventana
             revalidate();
             repaint();
 
-            panel.posicionarCursor();  //para acomodar el mouse
+            panel.posicionarCursor();
+            panel.requestFocusInWindow();
         });
 
         botonComoJugar.addActionListener(e -> {
