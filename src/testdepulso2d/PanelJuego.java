@@ -161,7 +161,7 @@ public class PanelJuego extends JPanel implements MouseMotionListener, KeyListen
             reproducirGrito();
             
     ImageIcon imagenOriginal = new ImageIcon(
-    getClass().getResource("screamer ale.png")
+    getClass().getResource("screamer ale.jpeg")
 );
 
 ImageIcon imagen = new ImageIcon(
