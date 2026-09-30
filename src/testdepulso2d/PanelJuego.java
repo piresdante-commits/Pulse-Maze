@@ -16,7 +16,7 @@ public class PanelJuego extends JPanel implements MouseMotionListener, KeyListen
     int[][] mapa = Mapa.mapa1;
     int numeroMapa = 1;
     
-    int tamañoCelda = 20;// Cada posición de la matriz ocupará un cuadrado de ? × ? píxeles.
+    int tamañoCelda = 20;// Cada posición de la matriz ocupará un cuadrado de 20 × 20 píxeles.
     
     Jugador jugador = new Jugador();
     
@@ -119,10 +119,10 @@ public class PanelJuego extends JPanel implements MouseMotionListener, KeyListen
         g.setColor(Color.BLUE);
 
         g.fillOval( // dibuja el circulo
-            jugador.columna * tamañoCelda + 5,
-            jugador.fila * tamañoCelda + 5,
-        20,
-        20
+            jugador.columna * tamañoCelda,    //Calcula la posición X.
+            jugador.fila * tamañoCelda,       //Calcula la posición Y.
+        19,              // El jugador ocupa 19 x 19 pixeles dentro de cada celda de la matriz.
+        19
         );
         g.setColor(Color.WHITE);
         g.drawString("ESC: salir del juego", 10, 15);  //Texto que le indica al jugador como salir.
