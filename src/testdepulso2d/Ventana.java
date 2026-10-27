@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 public class Ventana extends JFrame {  //Significa que nuestra clase Ventana hereda las características de JFrame.
     public Ventana() {
 
-        setTitle("Test de Pulso 2D"); //Le ponemos un nombre a la ventana.
+        setTitle("Pulse-Maze"); //Le ponemos un nombre a la ventana.
         setSize(800, 600); //Tamaño de la ventana.
 
         setLocationRelativeTo(null);// centra la pantalla.
@@ -34,7 +34,7 @@ public class Ventana extends JFrame {  //Significa que nuestra clase Ventana her
         panelMenu.setLayout(null);
 
         // Título
-        JLabel titulo = new JLabel("TEST DE PULSO 2D");
+        JLabel titulo = new JLabel("PULSE-MAZE");
 
         titulo.setBounds(180, 60, 450, 50);   //posicion y tamaño del titulo
 
